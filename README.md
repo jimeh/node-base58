@@ -15,7 +15,7 @@ Flickr short URL is: [`http://flic.kr/p/brXijP`](http://flic.kr/p/brXijP)
 
 ## Installation
 
-npm install base58
+    npm install base58
 
 ## Usage
 
