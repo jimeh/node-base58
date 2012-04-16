@@ -1,10 +1,16 @@
 {
   "name":        "base58",
   "version":     "0.0.1",
-  "author":      "Jim Myhrberg <contact@jimeh.me>",
+  "author": {
+    "name": "Jim Myhrberg",
+    "email": "contact@jimeh.me"
+  },
   "keywords":    "base58",
   "description": "Base58 encoding and decoding",
-  "license":     "MIT",
+  "licenses": [{
+    "type":     "MIT",
+    "url":      "https://raw.github.com/jimeh/node-base58/master/LICENSE.md"
+  }],
 
   "repository" : {
     "type" : "git",
