@@ -1,6 +1,6 @@
 require 'should'
 
-Base58 = require '../lib/base58'
+Base58 = require '..'
 
 examples = require './examples'
 
