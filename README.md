@@ -8,7 +8,7 @@ A Base58 encoding and decoding library for [Node.js].
 
 Base58 allows you to represent a numeric value with fewer characters, useful
 for short URLs among other things. Flickr is one the biggest sites that makes
-use it for short photo URLs.
+use of it for short photo URLs.
 
 For example `6857269519` becomes `brXijP` when Base58 encoded, and hence the
 Flickr short URL is: [`http://flic.kr/p/brXijP`](http://flic.kr/p/brXijP)
