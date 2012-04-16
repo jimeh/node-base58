@@ -35,4 +35,4 @@ coffee-dep:
 
 
 .SILENT:
-.PHONY: build watch test
+.PHONY: build watch remove-js publish test npm-dep coffee-dep
