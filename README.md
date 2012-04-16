@@ -1,5 +1,7 @@
 # node-base58
 
+[![Build Status](https://secure.travis-ci.org/jimeh/node-base58.png)](http://travis-ci.org/jimeh/node-base58)
+
 A Base58 encoding and decoding library for [Node.js].
 
 [node.js]: http://nodejs.org/
