@@ -1,4 +1,4 @@
-class Base58
+class Base58Builder
   constructor: ->
     @alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ"
     @base = @alphabet.length
@@ -22,4 +22,4 @@ class Base58
 
 
 # Export module
-module.exports = new Base58()
+module.exports = new Base58Builder()
