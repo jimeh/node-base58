@@ -11,7 +11,7 @@ for short URLs among other things. Flickr is one the biggest sites that makes
 use of it for short photo URLs.
 
 For example `6857269519` becomes `brXijP` when Base58 encoded, and hence the
-Flickr short URL is: [`http://flic.kr/p/brXijP`](http://flic.kr/p/brXijP)
+Flickr short URL is: `http://flic.kr/p/brXijP`
 
 ## Installation
 
