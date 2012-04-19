@@ -28,4 +28,4 @@ describe 'Base58', ->
     describe 'when passed a non-Base58 string', ->
       it 'throws an error', ->
         (-> Base58.decode('>_<')).should
-          .throw('Value passed not a valid Base58 string.')
+          .throw('Value passed is not a valid Base58 string.')
