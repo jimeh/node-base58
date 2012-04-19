@@ -10,9 +10,15 @@ describe 'Base58', ->
       for str, num of examples
         Base58.encode(num).should.eql(str)
 
+    describe 'when passed a float', ->
+      it 'throws an error', ->
+        (-> Base58.encode(3.14)).should
+          .throw('Value passed is not an integer.')
+
     describe 'when passed a non-number value', ->
       it 'throws an error', ->
-        (-> Base58.encode('hi')).should.throw('Value passed is not a number.')
+        (-> Base58.encode('hi')).should
+          .throw('Value passed is not an integer.')
 
   describe '.decode', ->
     it 'decodes Base58 string to number', ->

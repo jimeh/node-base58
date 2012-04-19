@@ -4,7 +4,7 @@ class Base58Builder
     @base = @alphabet.length
 
   encode: (num) ->
-    throw new Error('Value passed is not a number.') if typeof num != 'number'
+    throw new Error('Value passed is not an integer.') unless /^\d+$/.test num
     str = ''
     while num >= @base
       mod = num % @base
