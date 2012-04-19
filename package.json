@@ -1,6 +1,6 @@
 {
   "name":        "base58",
-  "version":     "0.0.2",
+  "version":     "0.1.0",
   "keywords":    "base58",
   "description": "Base58 encoding and decoding",
   "licenses": [{
