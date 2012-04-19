@@ -5,6 +5,7 @@ class Base58Builder
 
   encode: (num) ->
     throw new Error('Value passed is not an integer.') unless /^\d+$/.test num
+    num = parseInt(num) unless typeof num == 'number'
     str = ''
     while num >= @base
       mod = num % @base

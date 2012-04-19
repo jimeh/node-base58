@@ -10,6 +10,11 @@ describe 'Base58', ->
       for str, num of examples
         Base58.encode(num).should.eql(str)
 
+    describe 'when passed a string only containing numbers', ->
+      it 'encodes string after first converting it to an integer', ->
+        for str, num of examples
+          Base58.encode(num.toString()).should.eql(str)
+
     describe 'when passed a float', ->
       it 'throws an error', ->
         (-> Base58.encode(3.14)).should
