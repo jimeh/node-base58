@@ -30,8 +30,7 @@ npm-dep:
 
 coffee-dep:
 	test `which coffee` || echo 'You need to have CoffeeScript in your' \
-		'PATH.\nPlease install it using `brew install coffee-script` or' \
-		'`npm install coffee-script`.'
+		'PATH.\nPlease install it using `npm install coffee-script`.'
 
 
 .SILENT:
