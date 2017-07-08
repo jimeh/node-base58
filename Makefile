@@ -1,37 +1,23 @@
 NPM_EXECUTABLE_HOME := node_modules/.bin
 PATH := ${NPM_EXECUTABLE_HOME}:${PATH}
 
-SOURCE = ./src
-TARGET = ./lib
+hooks: .git/hooks/pre-commit
+hooks: .git/hooks/pre-push
 
-REPORTER = spec
-TEST_DIR = ./test
-TEST_FILES = *_test.coffee
+.git/hooks/pre-commit: hook.sh
+	cp $< $@
 
-build: coffee-dep
-	coffee -b -o $(TARGET) -c $(SOURCE)
+.git/hooks/pre-push: hook.sh
+	cp $< $@
 
-watch: coffee-dep
-	coffee -b -o $(TARGET) -cw $(SOURCE)
+publish: npm publish
 
-remove-js:
-	rm -fr lib/
+test: npm test
 
-publish: npm-dep build
-	npm publish
-
-test: build
-	mocha --reporter $(REPORTER) \
-		--compilers coffee:coffee-script \
-		$(shell find $(TEST_DIR) -name $(TEST_FILES))
+lint: npm run lint
 
 npm-dep:
 	test `which npm` || echo 'You need npm to do npm install... makes sense?'
 
-coffee-dep:
-	test `which coffee` || echo 'You need to have CoffeeScript in your' \
-		'PATH.\nPlease install it using `npm install coffee-script`.'
-
-
 .SILENT:
-.PHONY: build watch remove-js publish test npm-dep coffee-dep
+.PHONY: publish test lint npm-dep
