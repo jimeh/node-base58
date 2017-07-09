@@ -1,7 +1,11 @@
 module.exports = {
-  extends: 'semistandard',
   env: {
     browser: true,
     node: true
+  },
+  extends: ["prettier"],
+  plugins: ["prettier"],
+  rules: {
+    "prettier/prettier": "error"
   }
 };
