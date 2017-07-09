@@ -49,7 +49,7 @@ describe('Base58', function () {
 				assert.throws(function () {
 					base58.encode('hi');
 				}, function (err) {
-					return err.message === 'Value passed is not an integer.';
+					return err.message === 'Value passed is not a non-negative safe integer.';
 				});
 			});
 		});
@@ -59,7 +59,7 @@ describe('Base58', function () {
 				assert.throws(function () {
 					base58.encode(3.14);
 				}, function (err) {
-					return err.message === 'Value passed is not an integer.';
+					return err.message === 'Value passed is not a non-negative safe integer.';
 				});
 			});
 		});
