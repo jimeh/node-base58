@@ -10,11 +10,14 @@ hooks: .git/hooks/pre-push
 .git/hooks/pre-push: hook.sh
 	cp $< $@
 
-publish: npm publish
+publish:
+	npm publish
 
-test: npm test
+test:
+	npm run test
 
-lint: npm run lint
+lint:
+	npm run lint
 
 npm-dep:
 	test `which npm` || echo 'You need npm to do npm install... makes sense?'
