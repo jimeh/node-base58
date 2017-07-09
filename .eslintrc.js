@@ -1,13 +1,10 @@
-
 module.exports = {
-
   extends: 'flickr',
 
   env: {
-  	browser: true,
+    browser: true,
     node: true
   },
 
   rules: {}
-
 };
