@@ -7,19 +7,19 @@ var alphabetLookup = alphabet.split('').reduce(function (lookup, char, index) {
   return lookup;
 }, {});
 
-function assertNonNegativeSafeInteger(val) {
+function assertNonNegativeSafeInteger (val) {
   if (typeof val !== 'number' || isNaN(val) || val < 0 || val > Number.MAX_SAFE_INTEGER || Math.floor(val) !== val) {
     throw new Error('Value passed is not a non-negative safe integer.');
   }
 }
 
-function assertString(str) {
+function assertString (str) {
   if (typeof str !== 'string') {
     throw new Error('Value passed is not a string.');
   }
 }
 
-function assertBase58Character(character) {
+function assertBase58Character (character) {
   if (alphabetLookup[character] === undefined) {
     throw new Error('Value passed is not a valid Base58 string.');
   }
