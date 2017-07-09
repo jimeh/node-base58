@@ -63,6 +63,26 @@ describe('Base58', function () {
 				});
 			});
 		});
+
+		describe('when passed a negative number', function () {
+			it('throws an error', function () {
+				assert.throws(function () {
+					base58.encode(-300);
+				}, function (err) {
+					return err.message === 'Value passed is not a non-negative safe integer.';
+				});
+			});
+		});
+
+		describe('when passed a non-safe integer', function () {
+			it('throws an error', function () {
+				assert.throws(function () {
+					base58.encode(1E100);
+				}, function (err) {
+					return err.message === 'Value passed is not a non-negative safe integer.';
+				});
+			});
+		});
 	});
 
 	describe('.decode', function () {
