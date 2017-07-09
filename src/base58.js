@@ -8,9 +8,9 @@ var alphabetLookup = alphabet.split('').reduce(function (lookup, char, index) {
 	return lookup;
 }, {});
 
-function assertInteger(val) {
-	if (typeof val !== 'number' || isNaN(val) || Math.floor(val) !== val) {
-		throw new Error('Value passed is not an integer.');
+function assertNonNegativeSafeInteger(val) {
+	if (typeof val !== 'number' || isNaN(val) || val < 0 || val > Number.MAX_SAFE_INTEGER || Math.floor(val) !== val) {
+		throw new Error('Value passed is not a non-negative safe integer.');
 	}
 }
 
@@ -33,7 +33,7 @@ exports.encode = function (num) {
 
 	num = Number(num);
 
-	assertInteger(num);
+	assertNonNegativeSafeInteger(num);
 
 	while (num >= base) {
 		modulus = num % base;
