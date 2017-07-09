@@ -10,13 +10,13 @@ hooks: .git/hooks/pre-push
 .git/hooks/pre-push: hook.sh
 	cp $< $@
 
-publish:
+publish: npm-dep
 	npm publish
 
-test:
+test: npm-dep
 	npm run test
 
-lint:
+lint: npm-dep
 	npm run lint
 
 npm-dep:

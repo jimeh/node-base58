@@ -2,7 +2,7 @@ var assert = require('assert');
 var examples = require('./examples');
 var base58 = require('..');
 
-function exampleRunner(callback) {
+function exampleRunner (callback) {
   Object.keys(examples).forEach(function (str) {
     callback(str, examples[str]);
   });
