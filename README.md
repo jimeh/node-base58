@@ -21,8 +21,8 @@ Flickr short URL is: `http://flic.kr/p/brXijP`
 
 ```javascript
 const Base58 = require('base58');
-Base58.encode(6857269519); // 'brXijP'
-Base58.decode('brXijP');   // 6857269519
+Base58.int_to_base58(6857269519); // 'brXijP'
+Base58.base58_to_int('brXijP');   // 6857269519
 ```
 
 ## Credit

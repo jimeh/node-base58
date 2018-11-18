@@ -31,7 +31,7 @@ function assertBase58Character(character) {
   }
 }
 
-exports.encode = function(num) {
+exports.int_to_base58 = exports.encode = function(num) {
   let str = "";
   let modulus;
 
@@ -48,7 +48,7 @@ exports.encode = function(num) {
   return alphabet[num] + str;
 };
 
-exports.decode = function(str) {
+exports.base58_to_int = exports.decode = function(str) {
   assertString(str);
 
   return [...str].reverse().reduce((num, character, index) => {

@@ -27,17 +27,27 @@ describe("Base58", function() {
     assert.strictEqual(valid, true, "Expected the examples to be valid");
   });
 
-  describe(".encode", function() {
+  describe("backwards compatibility", function() {
+    it(".encode() is an alias to .int_to_base58()", function() {
+      assert.strictEqual(base58.encode, base58.int_to_base58);
+    });
+
+    it(".decode() is an alias to .base58_to_int()", function() {
+      assert.strictEqual(base58.decode, base58.base58_to_int);
+    });
+  });
+
+  describe(".int_to_base58()", function() {
     it("encodes number to Base58 string", function() {
       exampleRunner(function(str, num) {
-        assert.strictEqual(base58.encode(num), str);
+        assert.strictEqual(base58.int_to_base58(num), str);
       });
     });
 
     describe("when passed a string only containing numbers", function() {
       it("encodes string after first converting it to an integer", function() {
         exampleRunner(function(str, num) {
-          assert.strictEqual(base58.encode(num.toString()), str);
+          assert.strictEqual(base58.int_to_base58(num.toString()), str);
         });
       });
     });
@@ -46,7 +56,7 @@ describe("Base58", function() {
       it("throws an error", function() {
         assert.throws(
           function() {
-            base58.encode("hi");
+            base58.int_to_base58("hi");
           },
           function(err) {
             return (
@@ -61,7 +71,7 @@ describe("Base58", function() {
       it("throws an error", function() {
         assert.throws(
           function() {
-            base58.encode(3.14);
+            base58.int_to_base58(3.14);
           },
           function(err) {
             return (
@@ -76,7 +86,7 @@ describe("Base58", function() {
       it("throws an error", function() {
         assert.throws(
           function() {
-            base58.encode(-300);
+            base58.int_to_base58(-300);
           },
           function(err) {
             return (
@@ -91,7 +101,7 @@ describe("Base58", function() {
       it("throws an error", function() {
         assert.throws(
           function() {
-            base58.encode(1e100);
+            base58.int_to_base58(1e100);
           },
           function(err) {
             return (
@@ -103,10 +113,10 @@ describe("Base58", function() {
     });
   });
 
-  describe(".decode", function() {
+  describe(".base58_to_int()", function() {
     it("decodes base58 string to number", function() {
       exampleRunner(function(str, num) {
-        assert.strictEqual(base58.decode(str), num);
+        assert.strictEqual(base58.base58_to_int(str), num);
       });
     });
 
@@ -114,7 +124,7 @@ describe("Base58", function() {
       it("throws an error", function() {
         assert.throws(
           function() {
-            base58.decode(123);
+            base58.base58_to_int(123);
           },
           function(err) {
             return err.message === "Value passed is not a string.";
@@ -127,7 +137,7 @@ describe("Base58", function() {
       it("throws an error", function() {
         assert.throws(
           function() {
-            base58.decode(">_<");
+            base58.base58_to_int(">_<");
           },
           function(err) {
             return err.message === "Value passed is not a valid Base58 string.";
