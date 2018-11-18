@@ -5,12 +5,7 @@
     "base58, flickr"
   ],
   "description": "Flickr Flavored Base58 Encoding and Decoding",
-  "licenses": [
-    {
-      "type": "MIT",
-      "url": "https://raw.github.com/jimeh/node-base58/master/LICENSE.md"
-    }
-  ],
+  "license": "MIT",
   "author": {
     "name": "Jim Myhrberg",
     "email": "contact@jimeh.me"
