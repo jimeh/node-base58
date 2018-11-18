@@ -34,4 +34,4 @@ name.
 
 ## License
 
-Released under the MIT license. Copyright (c) 2012 Jim Myhrberg.
+Released under the MIT license. Copyright (c) 2018 Jim Myhrberg.
