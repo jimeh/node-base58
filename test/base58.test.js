@@ -1,6 +1,6 @@
-var assert = require("assert");
-var examples = require("./examples");
-var base58 = require("..");
+const assert = require("assert");
+const examples = require("./examples");
+const base58 = require("..");
 
 function exampleRunner(callback) {
   Object.keys(examples).forEach(function(str) {

@@ -1,8 +1,8 @@
-var alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
-var base = alphabet.length;
+const alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
+const base = alphabet.length;
 
 // Create a lookup table to fetch character index
-var alphabetLookup = alphabet.split("").reduce(function(lookup, char, index) {
+const alphabetLookup = [...alphabet].reduce((lookup, char, index) => {
   lookup[char] = index;
   return lookup;
 }, {});
@@ -32,8 +32,8 @@ function assertBase58Character(character) {
 }
 
 exports.encode = function(num) {
-  var str = "";
-  var modulus;
+  let str = "";
+  let modulus;
 
   num = Number(num);
 
@@ -51,7 +51,7 @@ exports.encode = function(num) {
 exports.decode = function(str) {
   assertString(str);
 
-  return str.split("").reverse().reduce(function(num, character, index) {
+  return [...str].reverse().reduce((num, character, index) => {
     assertBase58Character(character);
     return num + alphabetLookup[character] * Math.pow(base, index);
   }, 0);
