@@ -29,7 +29,8 @@
     "prettier": "^1.14.3"
   },
   "scripts": {
-    "lint": "eslint . --fix",
+    "lint": "eslint .",
+    "lint-fix": "eslint . --fix",
     "test": "mocha"
   }
 }
