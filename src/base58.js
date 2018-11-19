@@ -1,9 +1,17 @@
-const alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
-const base = alphabet.length;
+const alphabets = {
+  flickr: "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ",
+  bitcoin: "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz",
+  ripple: "rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz"
+};
+const base = alphabets.flickr.length;
 
 // Create a lookup table to fetch character index
-const alphabetLookup = [...alphabet].reduce((lookup, char, index) => {
-  lookup[char] = index;
+const alphabetLookups = Object.keys(alphabets).reduce((lookup, name) => {
+  lookup[name] = [...alphabets[name]].reduce((memo, char, index) => {
+    memo[char] = index;
+    return memo;
+  }, {});
+
   return lookup;
 }, {});
 
@@ -25,13 +33,13 @@ function assertString(str) {
   }
 }
 
-function assertBase58Character(character) {
-  if (alphabetLookup[character] === undefined) {
+function assertBase58Character(character, alphabet) {
+  if (alphabetLookups[alphabet][character] === undefined) {
     throw new Error("Value passed is not a valid Base58 string.");
   }
 }
 
-exports.int_to_base58 = exports.encode = function(num) {
+exports.int_to_base58 = exports.encode = function(num, alphabet = "flickr") {
   let str = "";
   let modulus;
 
@@ -41,18 +49,18 @@ exports.int_to_base58 = exports.encode = function(num) {
 
   while (num >= base) {
     modulus = num % base;
-    str = alphabet[modulus] + str;
+    str = alphabets[alphabet][modulus] + str;
     num = Math.floor(num / base);
   }
 
-  return alphabet[num] + str;
+  return alphabets[alphabet][num] + str;
 };
 
-exports.base58_to_int = exports.decode = function(str) {
+exports.base58_to_int = exports.decode = function(str, alphabet = "flickr") {
   assertString(str);
 
   return [...str].reverse().reduce((num, character, index) => {
-    assertBase58Character(character);
-    return num + alphabetLookup[character] * Math.pow(base, index);
+    assertBase58Character(character, alphabet);
+    return num + alphabetLookups[alphabet][character] * Math.pow(base, index);
   }, 0);
 };
