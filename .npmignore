@@ -1,2 +1,6 @@
 .DS_Store
+.eslintrc.js
+.travis.yml
+Makefile
 node_modules
+package-lock.json
