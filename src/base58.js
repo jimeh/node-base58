@@ -7,29 +7,18 @@ const alphabetLookup = [...alphabet].reduce((lookup, char, index) => {
   return lookup;
 }, {});
 
-function assertNonNegativeSafeInteger(val) {
-  if (
-    typeof val !== "number" ||
-    isNaN(val) ||
-    val < 0 ||
-    val > Number.MAX_SAFE_INTEGER ||
-    Math.floor(val) !== val
-  ) {
-    throw new Error("Value passed is not a non-negative safe integer.");
-  }
+const isSafeNonNegativeInt = (thing) => thing >= 0 && Number.isSafeInteger(thing)
+const isString = (thing) => typeof thing === 'string'
+const isBase58Char = (char) => char in alphabetLookup
+
+const assertType = (checkFn, message) => (value) => {
+  if (!checkFn(value))
+    throw TypeError(message)
 }
 
-function assertString(str) {
-  if (typeof str !== "string") {
-    throw new Error("Value passed is not a string.");
-  }
-}
-
-function assertBase58Character(character) {
-  if (alphabetLookup[character] === undefined) {
-    throw new Error("Value passed is not a valid Base58 string.");
-  }
-}
+const assertNonNegativeSafeInteger = assertType(isSafeNonNegativeInt, "Value passed is not a non-negative safe integer.")
+const assertString = assertType(isString, "Value passed is not a string.")
+const assertBase58Character = assertType(isBase58Char, "Value passed is not a valid Base58 string.")
 
 exports.int_to_base58 = exports.encode = function(num) {
   let str = "";
