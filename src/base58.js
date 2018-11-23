@@ -22,10 +22,7 @@ const assertNonNegativeSafeInteger = assertType(
   "Value passed is not a non-negative safe integer."
 );
 
-const assertString = assertType(
-  isString,
-  "Value passed is not a string."
-);
+const assertString = assertType(isString, "Value passed is not a string.");
 
 const assertBase58Character = assertType(
   isBase58Char,
