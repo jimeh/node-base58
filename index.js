@@ -1,1 +1,1 @@
-module.exports = require("./src/base58");
+module.exports = require("./src");
