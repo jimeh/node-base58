@@ -1,3 +1,5 @@
+"use strict";
+
 const alphabet = "123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ";
 const base = alphabet.length;
 
@@ -7,7 +9,9 @@ const alphabetLookup = [...alphabet].reduce((lookup, char, index) => {
   return lookup;
 }, {});
 
-function assertNonNegativeSafeInteger(val) {
+const isBigIntSupported = typeof BigInt === "function";
+
+function assertNonNegativeSafeInteger(val, msg) {
   if (
     typeof val !== "number" ||
     isNaN(val) ||
@@ -15,7 +19,8 @@ function assertNonNegativeSafeInteger(val) {
     val > Number.MAX_SAFE_INTEGER ||
     Math.floor(val) !== val
   ) {
-    throw new Error("Value passed is not a non-negative safe integer.");
+    msg = msg || "Value passed is not a non-negative safe integer.";
+    throw new Error(msg);
   }
 }
 
@@ -35,6 +40,10 @@ exports.int_to_base58 = exports.encode = function(num) {
   let str = "";
   let modulus;
 
+  if (isBigIntSupported && typeof num === "bigint") {
+    return require("./bigint").bigint_to_base58(num);
+  }
+
   num = Number(num);
 
   assertNonNegativeSafeInteger(num);
@@ -48,11 +57,22 @@ exports.int_to_base58 = exports.encode = function(num) {
   return alphabet[num] + str;
 };
 
-exports.base58_to_int = exports.decode = function(str) {
+exports.base58_to_int = exports.decode = function(str, useBigInt) {
   assertString(str);
+
+  useBigInt = useBigInt && isBigIntSupported;
+
+  if (useBigInt) {
+    return require("./bigint").base58_to_bigint(str);
+  }
 
   return [...str].reverse().reduce((num, character, index) => {
     assertBase58Character(character);
-    return num + alphabetLookup[character] * Math.pow(base, index);
+    const result = num + alphabetLookup[character] * Math.pow(base, index);
+    assertNonNegativeSafeInteger(
+      result,
+      "Value passed exceeds MAX_SAFE_INTEGER limit."
+    );
+    return result;
   }, 0);
 };

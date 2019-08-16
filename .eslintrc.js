@@ -9,6 +9,12 @@ module.exports = {
     "prettier/prettier": "error"
   },
   parserOptions: {
-    "ecmaVersion": 6
-  }
+    ecmaVersion: 6
+  },
+  overrides: [{
+    files: ["src/bigint.js"],
+    parserOptions: {
+      ecmaVersion: 2019
+    }
+  }]
 };
