@@ -6,13 +6,15 @@ const assert = require("./assert");
 const base = alphabet.length;
 const isBigIntSupported = typeof BigInt === "function";
 
-exports.int_to_base58 = exports.encode = function(num) {
-  let str = "";
-  let modulus;
+const isBigInt = arg => typeof arg === "bigint";
 
-  if (isBigIntSupported && typeof num === "bigint") {
+exports.int_to_base58 = exports.encode = function(num) {
+  if (isBigIntSupported && isBigInt(num)) {
     return require("./bigint").bigint_to_base58(num);
   }
+
+  let str = "";
+  let modulus;
 
   num = Number(num);
 
@@ -28,13 +30,11 @@ exports.int_to_base58 = exports.encode = function(num) {
 };
 
 exports.base58_to_int = exports.decode = function(str, useBigInt) {
-  assert.string(str);
-
-  useBigInt = useBigInt && isBigIntSupported;
-
-  if (useBigInt) {
+  if (isBigIntSupported && useBigInt) {
     return require("./bigint").base58_to_bigint(str);
   }
+
+  assert.string(str);
 
   return [...str].reverse().reduce((num, character, index) => {
     assert.base58Character(character);
