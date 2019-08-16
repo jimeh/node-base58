@@ -1,6 +1,10 @@
+"use strict";
+
 const assert = require("assert");
 const examples = require("./examples");
 const base58 = require("..");
+
+const isBigIntSupported = typeof BigInt === "function";
 
 function exampleRunner(callback) {
   Object.keys(examples).forEach(function(str) {
@@ -111,6 +115,32 @@ describe("Base58", function() {
         );
       });
     });
+
+    if (isBigIntSupported) {
+      describe("when passed a BigInt", function() {
+        it("encodes BigInt to Base58 string", function() {
+          assert.strictEqual(
+            base58.int_to_base58(BigInt("72157710303587177")),
+            "aHsmG84krK"
+          );
+        });
+      });
+
+      describe("when passed a negative BigInt", function() {
+        it("throws an error", function() {
+          assert.throws(
+            function() {
+              base58.int_to_base58(BigInt(-300));
+            },
+            function(err) {
+              return (
+                err.message === "Value passed is not a non-negative integer."
+              );
+            }
+          );
+        });
+      });
+    }
   });
 
   describe(".base58_to_int()", function() {
@@ -145,5 +175,31 @@ describe("Base58", function() {
         );
       });
     });
+
+    if (isBigIntSupported) {
+      describe("when passed base58 string exceeding MAX_SAFE_INTEGER limit", function() {
+        it("throws an error", function() {
+          assert.throws(
+            function() {
+              base58.base58_to_int("aHsmG84krK");
+            },
+            function(err) {
+              return (
+                err.message === "Value passed exceeds MAX_SAFE_INTEGER limit."
+              );
+            }
+          );
+        });
+      });
+
+      describe("when BigInt mode is enabled", function() {
+        it("decodes base58 string to BigInt", function() {
+          assert.strictEqual(
+            base58.base58_to_int("aHsmG84krK", true),
+            BigInt("72157710303587177")
+          );
+        });
+      });
+    }
   });
 });

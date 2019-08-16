@@ -1,3 +1,5 @@
+"use strict";
+
 module.exports = {
   "6hKMCS": 3471391110,
   "6hDrmR": 3470152229,
